@@ -5,6 +5,9 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 require('dotenv').config();
 
+// import routers
+const postRoutes = require('./routes/post');
+
 // app
 const app = express();
 
@@ -25,12 +28,8 @@ app.use(morgan('dev'));
 // Body parser
 app.use(express.json());
 
-// route
-app.get('*', (req, res) => {
-  res.json({
-    data: 'You reached nodejs for crud app',
-  });
-});
+// route middleware
+app.use('/api', postRoutes);
 
 // port
 const port = process.env.PORT || 8000;
